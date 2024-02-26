@@ -1,12 +1,14 @@
-import type { NextApiResponse, NextApiRequest } from 'next';
-
+import type { NextApiRequest, NextApiResponse } from 'next';
+ 
+export const config = {
+  runtime: 'edge',
+};
+ 
 export default function handler(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
-  response.setHeader('Vercel-CDN-Cache-Control', 'max-age=3600');
-  response.setHeader('CDN-Cache-Control', 'max-age=6000');
-  response.setHeader('Cache-Control', 'max-age=1000');
+  response.setHeader('Cache-Control', 'public, s-maxage=1');
  
   return response.status(200).json({ name: 'John Doe' });
 }
